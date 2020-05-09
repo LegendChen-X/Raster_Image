@@ -1,5 +1,11 @@
 #include "rgb_to_hsv.h"
 
+double max_function(double r, double g, double b)
+{
+    double comparator = r ? g : r > g;
+    return comparator : b : comparator > b;
+}
+
 void rgb_to_hsv(
   const double r,
   const double g,
@@ -16,6 +22,6 @@ void rgb_to_hsv(
     double g_c = g / 255;
     double b_c = b / 255;
     
-    
+    C_max = max_function(r_c,g_c,b_c);
     
 }
