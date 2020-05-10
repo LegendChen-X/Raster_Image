@@ -53,4 +53,30 @@ void reflect(
         }
     }
     
+    else if(num_channels==1)
+    {
+        unsigned char buffer[height][width];
+        int index = 0;
+        for(int i=0;i<height && index<width*height*num_channels;++i)
+            for(int j=0;j<width && index<width*height*num_channels;++j)
+                buffer[i][j] = input[index++];
+        
+        for(int i=0;i<height;++i)
+        {
+            for(int j=0;j<width/2;++j)
+            {
+                unsigned char tmp = buffer[i][j];
+                buffer[i][j] = buffer[i][width-j];
+                buffer[i][width-j] = tmp;
+            }
+        }
+        
+        index = 0;
+        for(int i=0;i<height && index<width*height*num_channels;++i)
+            for(int j=0;j<width && index<width*height*num_channels;++j)
+                reflected[index++]=buffer[i][j];
+    }
+    
+    else printf("Invalid num channels\n");
+    
 }

@@ -37,6 +37,7 @@ int main(int argc, char *argv[])
   // Convert to RGB
   std::vector<unsigned char> rgb;
   rgba_to_rgb(rgba,width,height,rgb);
+
   // Write to .ppm file format
   write_ppm("rgb.ppm",rgb,width,height,3);
 
@@ -54,12 +55,6 @@ int main(int argc, char *argv[])
   std::vector<unsigned char> gray;
   rgb_to_gray(rgb,width,height,gray);
   write_ppm("gray.ppm",gray,width,height,1);
-    
-    /*
-    std::vector<unsigned char> rotated_g;
-    rotate(gray,width,height,1,rotated_g);
-    write_ppm("rotated_g.ppm",rotated_g,height,width,1);
-     */
 
   // Create fake bayer mosaic image
   std::vector<unsigned char> bayer;
