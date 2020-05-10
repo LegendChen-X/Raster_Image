@@ -28,25 +28,29 @@ void demosaic(
     {
         for(int j=1;j<width-1;++j)
         {
+            //top left green
             if(i%2==0 && j%2==0)
             {
                 rgb_buffer[i][j].r = (buffer[i-1][j] + buffer[i+1][j]) / 2;
                 rgb_buffer[i][j].g = buffer[i][j];
-                rgb_buffer[i][j].b = (buffer[i][j-1]+buffer[i][j+1]) / 2;
+                rgb_buffer[i][j].b = (buffer[i][j-1] + buffer[i][j+1]) / 2;
             }
+            //top right blue
             if(i%2==0 && j%2!=0)
             {
                 rgb_buffer[i][j].r = (buffer[i-1][j-1] + buffer[i-1][j+1] + buffer[i+1][j-1] + buffer[i+1][j+1]) / 4;
                 rgb_buffer[i][j].g = (buffer[i-1][j] + buffer[i+1][j] + buffer[i][j-1] + buffer[i][j+1]) / 4;
                 rgb_buffer[i][j].b = buffer[i][j];
             }
+            //bottom left red
             else if(i%2!=0 && j%2==0)
             {
                 rgb_buffer[i][j].r = buffer[i][j];
                 rgb_buffer[i][j].g = (buffer[i-1][j] + buffer[i+1][j] + buffer[i][j-1] + buffer[i][j+1]) / 4;
                 rgb_buffer[i][j].b = (buffer[i-1][j-1] + buffer[i-1][j+1] + buffer[i+1][j-1] + buffer[i+1][j+1]) / 4;
             }
-            else
+            //bottom right green
+            else if(i%2!=0 && j%2!=0)
             {
                 rgb_buffer[i][j].r = (buffer[i][j-1] + buffer[i][j+1]) / 2;
                 rgb_buffer[i][j].g = buffer[i][j];
@@ -54,6 +58,56 @@ void demosaic(
             }
         }
     }
+    
+    rgb_buffer[0][0].r = buffer[1][0];
+    rgb_buffer[0][0].g = buffer[0][0];
+    rgb_buffer[0][0].b = buffer[0][1];
+    
+    for(int i=1;i<height-1;++i)
+    {
+        if(i%2==0)
+        {
+            rgb_buffer[i][0].r = (buffer[i-1][0] + buffer[i+1][0]) / 2;
+            rgb_buffer[i][0].g = buffer[i][0];
+            rgb_buffer[i][0].b = buffer[i][1];
+            
+            if((width-1) % 2 == 0)
+            {
+                rgb_buffer[i][width-1].r = (buffer[i-1][width-1] + buffer[i+1][width-1]) / 2;
+                rgb_buffer[i][width-1].g = buffer[i][width-1];
+                rgb_buffer[i][width-1].b = buffer[i][width-2];
+            }
+            
+            else
+            {
+                rgb_buffer[i][width-1].r = (buffer[i-1][width-2] + buffer[i+1][width-2]) / 2;
+                rgb_buffer[i][width-1].g = (buffer[i][width-2] + buffer[i-1][width-1] + buffer[i+1][width-1]) / 3;
+                rgb_buffer[i][width-1].b = buffer[i][width-1];
+            }
+        }
+        
+        else
+        {
+            rgb_buffer[i][0].r = buffer[i][0];
+            rgb_buffer[i][0].g = (buffer[i-1][0] + buffer[i+1][0] + buffer[i][1]) / 3;
+            rgb_buffer[i][0].b = (buffer[i-1][1] + buffer[i+1][1]) / 2;
+            
+            if((width-1) % 2 == 0)
+            {
+                rgb_buffer[i][width-1].r = buffer[i][width-1];
+                rgb_buffer[i][width-1].g = (buffer[i-1][width-1] + buffer[i+1][width-1] + buffer[i][width-2]) / 3;
+                rgb_buffer[i][width-1].b = (buffer[i-1][width-2] + buffer[i+1][width-2]) / 2;
+            }
+            
+            else
+            {
+                rgb_buffer[i][width-1].r = buffer[i][width-2];
+                rgb_buffer[i][width-1].g = buffer[i][width-1];
+                rgb_buffer[i][width-1].b = (buffer[i-1][width-1] + buffer[i+1][width-1]) / 2;
+            }
+        }
+    }
+    
     
         for(int j=1;j<width-1;++j)
         {
@@ -97,12 +151,6 @@ void demosaic(
                 }
             }
         }
-  
-    
-            
-            rgb_buffer[0][0].r = buffer[1][0];
-            rgb_buffer[0][0].g = buffer[0][0];
-            rgb_buffer[0][0].b = buffer[0][1];
             
             if((width-1) % 2 == 0)
             {
