@@ -70,12 +70,12 @@ int main(int argc, char *argv[])
   std::vector<unsigned char> demosaicked;
   demosaic(bayer,width,height,demosaicked);
   write_ppm("demosaicked.ppm",demosaicked,width,height,3);
-/*
+
   // Shift the hue of the image by 180°
   std::vector<unsigned char> shifted;
   hue_shift(rgb,width,height,180.0,shifted);
   write_ppm("shifted.ppm",shifted,width,height,3);
-
+/*
   // Partially desaturate an image by 25%
   std::vector<unsigned char> desaturated;
   desaturate(rgb,width,height,0.25,desaturated);
