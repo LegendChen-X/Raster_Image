@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
   std::vector<unsigned char> desaturated;
   desaturate(rgb,width,height,0.25,desaturated);
   write_ppm("desaturated.ppm",desaturated,width,height,3);
-/*
+
   // Alpha composite multiple images (if present)
   std::vector<unsigned char> composite_rgba;
   read_rgba_from_png(input_filenames[0],composite_rgba,width,height);
@@ -96,5 +96,4 @@ int main(int argc, char *argv[])
   std::vector<unsigned char> composite;
   rgba_to_rgb(composite_rgba,width,height,composite);
   write_ppm("composite.ppm",composite,width,height,3);
- */
 }
