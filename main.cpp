@@ -75,12 +75,12 @@ int main(int argc, char *argv[])
   std::vector<unsigned char> shifted;
   hue_shift(rgb,width,height,180.0,shifted);
   write_ppm("shifted.ppm",shifted,width,height,3);
-/*
+
   // Partially desaturate an image by 25%
   std::vector<unsigned char> desaturated;
   desaturate(rgb,width,height,0.25,desaturated);
   write_ppm("desaturated.ppm",desaturated,width,height,3);
-
+/*
   // Alpha composite multiple images (if present)
   std::vector<unsigned char> composite_rgba;
   read_rgba_from_png(input_filenames[0],composite_rgba,width,height);
