@@ -55,6 +55,15 @@ int main(int argc, char *argv[])
   std::vector<unsigned char> gray;
   rgb_to_gray(rgb,width,height,gray);
   write_ppm("gray.ppm",gray,width,height,1);
+    
+    //Reflection 1 channel
+    reflect(gray,width,height,1,reflected);
+    write_ppm("reflected_1.ppm",reflected,width,height,1);
+    
+    //Rotate 1 channel
+    std::vector<unsigned char> rotated_1;
+    rotate(gray,width,height,1,rotated_1);
+    write_ppm("rotated_1.ppm",rotated_1,height,width,1);
 
   // Create fake bayer mosaic image
   std::vector<unsigned char> bayer;
