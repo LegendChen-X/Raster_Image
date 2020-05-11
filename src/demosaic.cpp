@@ -36,7 +36,7 @@ void demosaic(
                 rgb_buffer[i][j].b = (buffer[i][j-1] + buffer[i][j+1]) / 2;
             }
             //top right blue
-            if(i%2==0 && j%2!=0)
+            else if(i%2==0 && j%2!=0)
             {
                 rgb_buffer[i][j].r = (buffer[i-1][j-1] + buffer[i-1][j+1] + buffer[i+1][j-1] + buffer[i+1][j+1]) / 4;
                 rgb_buffer[i][j].g = (buffer[i-1][j] + buffer[i+1][j] + buffer[i][j-1] + buffer[i][j+1]) / 4;
@@ -50,7 +50,7 @@ void demosaic(
                 rgb_buffer[i][j].b = (buffer[i-1][j-1] + buffer[i-1][j+1] + buffer[i+1][j-1] + buffer[i+1][j+1]) / 4;
             }
             //bottom right green
-            else if(i%2!=0 && j%2!=0)
+            else
             {
                 rgb_buffer[i][j].r = (buffer[i][j-1] + buffer[i][j+1]) / 2;
                 rgb_buffer[i][j].g = buffer[i][j];
