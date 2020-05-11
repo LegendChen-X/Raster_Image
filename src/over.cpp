@@ -40,10 +40,10 @@ void over(
     {
         for(int j=0;j<width;++j)
         {
-            C_buff[i][j].r = A_buff[i][j].r * A_buff[i][j].alpha + B_buff[i][j].r * (1 - A_buff[i][j].alpha);
-            C_buff[i][j].g = A_buff[i][j].g * A_buff[i][j].alpha + B_buff[i][j].g * (1 - A_buff[i][j].alpha);
-            C_buff[i][j].b = A_buff[i][j].b * A_buff[i][j].alpha + B_buff[i][j].b * (1 - A_buff[i][j].alpha);
-            C_buff[i][j].alpha = A_buff[i][j].alpha * A_buff[i][j].alpha + B_buff[i][j].alpha * (1 - A_buff[i][j].alpha);
+            C_buff[i][j].alpha = A_buff[i][j].alpha + B_buff[i][j].alpha * (1 - A_buff[i][j].alpha);
+            C_buff[i][j].r = (A_buff[i][j].r * A_buff[i][j].alpha + B_buff[i][j].r * B_buff[i][j].alpha * (1 - A_buff[i][j].alpha)) / C_buff[i][j].alpha;
+            C_buff[i][j].g = (A_buff[i][j].g * A_buff[i][j].alpha + B_buff[i][j].g * B_buff[i][j].alpha * (1 - A_buff[i][j].alpha)) / C_buff[i][j].alpha;
+            C_buff[i][j].b = (A_buff[i][j].b * A_buff[i][j].alpha + B_buff[i][j].b * B_buff[i][j].alpha * (1 - A_buff[i][j].alpha)) / C_buff[i][j].alpha;
         }
     }
     
@@ -55,7 +55,7 @@ void over(
             C[index++] = C_buff[i][j].r;
             C[index++] = C_buff[i][j].g;
             C[index++] = C_buff[i][j].b;
-            C[index++] = C_buff[i][j].alpha;
+            C[index++] = C_buff[i][j].alpha * 255;
         }
     }
 }
