@@ -55,7 +55,7 @@ void over(
             C[index++] = C_buff[i][j].r;
             C[index++] = C_buff[i][j].g;
             C[index++] = C_buff[i][j].b;
-            C[index++] = C_buff[i][j].alpha * 255;
+            C[index++] = (unsigned char) C_buff[i][j].alpha * 255;
         }
     }
 }
